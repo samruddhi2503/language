@@ -13,6 +13,7 @@ body {
   box-shadow: inset 0 0 50px rgba(0, 0, 0, 0.1); /* Soft inner shadow effect for depth */
 }
 
+
 /* Header */
 .header {
   display: flex;
@@ -739,3 +740,394 @@ input:focus {
   max-width: 400px;
 }
 
+/* Dashboard Styles */
+.dashboard {
+  position: absolute; /* Change from 'fixed' to 'absolute' */
+  top: 120px;
+  left: 20px; /* Position the dashboard button */
+  z-index: 1000;
+}
+
+.dashboard-button {
+  background: none;
+  border: none;
+  cursor: pointer;
+  padding: 10px;
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.dashboard-button .line {
+  width: 25px;
+  height: 3px;
+  background-color: #333;
+  border-radius: 2px;
+  transition: background-color 0.3s;
+}
+
+.dashboard-button:hover .line {
+  background-color: #007bff; /* Change color on hover */
+}
+
+/* Sliding Dashboard Menu */
+.dashboard-menu {
+  position: absolute; /* Change from 'fixed' to 'absolute' */
+  top: 70px; /* Adjusted position to account for scrolling */
+  left: -300px; /* Initially hidden off-screen */
+  height: 40%;
+  width: 250px;
+  background: #f9f9f9;
+  box-shadow: 2px 0 5px rgba(0, 0, 0, 0.2);
+  z-index: 999;
+  transition: transform 0.3s ease-in-out;
+  display: flex;
+  flex-direction: column;
+  padding: 20px;
+  border-right: 1px solid #ddd;
+}
+
+.dashboard-menu.open {
+  transform: translateX(300px); /* Slide into view */
+}
+
+.dashboard-menu ul {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+.dashboard-menu ul li {
+  padding: 15px;
+  margin: 10px 0;
+  font-family: Arial, sans-serif;
+  font-size: 16px;
+  color: #333;
+  cursor: pointer;
+  transition: background-color 0.3s, color 0.3s;
+  border-radius: 5px;
+}
+
+.dashboard-menu ul li:hover {
+  background-color: #007bff;
+  color: #fff;
+}
+/* Remove background for the Start Learning page */
+.start-learning {
+  background-image: none !important; /* Ensure that the background image is removed */
+  background: none !important; /* Remove any other background */
+}
+
+/* If the image is applied to the body element globally */
+body.start-learning {
+  background-image: none !important;
+  background: none !important;
+}
+/* Start Learning Page Styling */
+.start-learning {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  height: 100vh; /* Full viewport height */
+  text-align: center; /* Center the text horizontally */
+}
+
+.start-learning h1 {
+  font-size: 2.5rem;
+  color: #333;
+}
+
+.start-learning p {
+  font-size: 1.2rem;
+  color: #555;
+}
+.start-learning {
+  padding: 20px;
+  max-width: 600px;
+  margin: auto;
+  text-align: center;
+  color: #333;
+}
+
+.form-container {
+  background-color: rgba(255, 255, 255, 0.7); /* Transparent background */
+  border-radius: 10px;
+  padding: 30px;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.2); /* Subtle shadow */
+  backdrop-filter: blur(10px); /* Add a blur effect for the background */
+  transition: transform 0.3s ease-in-out, box-shadow 0.3s ease-in-out;
+}
+
+.form-container:hover {
+  transform: scale(1.05); /* Slight zoom effect on hover */
+  box-shadow: 0 8px 30px rgba(0, 0, 0, 0.4); /* Stronger shadow on hover */
+}
+
+h1 {
+  font-size: 2.5rem;
+  margin-bottom: 20px;
+}
+
+p {
+  font-size: 1.1rem;
+  margin-bottom: 30px;
+}
+
+.form-group {
+  margin-bottom: 15px;
+}
+
+label {
+  display: block;
+  margin-bottom: 5px;
+  font-weight: bold;
+}
+
+input[type="number"],
+select {
+  padding: 8px;
+  width: 100%;
+  max-width: 300px;
+  margin: 5px 0;
+  border-radius: 5px;
+  border: 1px solid #ccc;
+  transition: border 0.3s ease;
+}
+
+input[type="checkbox"] {
+  margin-right: 10px;
+}
+
+input[type="number"]:focus,
+select:focus {
+  border-color: #007bff;
+}
+
+button {
+  padding: 10px 20px;
+  background-color: #007bff;
+  color: white;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+button:hover {
+  background-color: #0056b3;
+}
+
+.form-group label {
+  margin-right: 20px;
+}
+
+input[type="radio"] {
+  margin-right: 10px;
+}
+
+.levels-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  height: 100vh;
+  padding: 60px;
+  background:#87CEEB; /* Deep professional blue */
+  color: #fff;
+}
+
+.level-container {
+  display: flex;
+  justify-content: center;
+  margin: 30px 60; /* Space between containers */
+  opacity: 0;
+  animation: fadeInUp 2.0s forwards;
+}
+
+.level-container:nth-child(1) {
+  animation-delay: 0.2s;
+}
+.level-container:nth-child(2) {
+  animation-delay: 0.4s;
+}
+.level-container:nth-child(3) {
+  animation-delay: 0.6s;
+}
+
+.level {
+  background-color: rgba(255, 255, 255, 0.2); /* Transparent background with white tint */
+  border-radius: 10px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3); /* Slight shadow to give depth */
+  padding: 30px; /* Padding inside each container */
+  width: 80%;
+  max-width: 400px;
+  text-align: center;
+  backdrop-filter: blur(10px); /* Optional: add a blur effect to the background */
+  transition: transform 0.3s ease, opacity 0.3s ease;
+}
+
+.level-heading {
+  font-size: 30px;
+  font-weight: bold;
+  color: black; /* White text for better contrast */
+  margin-bottom: 15px;
+  transition: transform 0.3s ease;
+}
+
+.level-heading:hover {
+  transform: scale(1.1);
+  color: #4CAF50; /* Subtle green on hover */
+}
+
+.level-description {
+  font-size: 16px;
+  color: black; /* White text for better visibility on blue background */
+  margin-bottom: 20px;
+  transition: color 0.3s ease;
+}
+
+.start-button {
+  background-color: #4CAF50;
+  color: white;
+  padding: 12px 24px;
+  font-size: 18px;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: background-color 0.3s ease, transform 0.3s ease;
+}
+
+.start-button:hover {
+  background-color: #45a049;
+  transform: translateY(-3px);
+}
+
+.start-button:active {
+  transform: translateY(0);
+}
+
+/* Animation for fading in and sliding up */
+@keyframes fadeInUp {
+  0% {
+    opacity: 0;
+    transform: translateY(30px);
+  }
+  100% {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.chatbot-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: space-between;
+  height: 90vh;
+  max-width: 600px;
+  margin: auto;
+  background-color: #f8f9fa;
+  border-radius: 10px;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  overflow: hidden;
+}
+
+.chatbot-header {
+  background-color: #007bff;
+  color: white;
+  width: 100%;
+  text-align: center;
+  padding: 10px;
+  font-size: 18px;
+  font-weight: bold;
+}
+
+.chatbot-messages {
+  flex: 1;
+  padding: 20px;
+  width: 100%;
+  overflow-y: auto;
+  background-color: #ffffff;
+}
+
+.chatbot-message {
+  margin: 10px 0;
+  padding: 10px;
+  border-radius: 5px;
+}
+
+.chatbot-message.bot {
+  background-color: #e9ecef;
+  align-self: flex-start;
+}
+
+.chatbot-message.user {
+  background-color: #007bff;
+  color: white;
+  align-self: flex-end;
+}
+
+.chatbot-input {
+  display: flex;
+  width: 100%;
+  padding: 10px;
+  background-color: #f8f9fa;
+  border-top: 1px solid #ddd;
+}
+
+.chatbot-input input {
+  flex: 1;
+  padding: 10px;
+  border: 1px solid #ddd;
+  border-radius: 5px;
+  margin-right: 10px;
+}
+
+.chatbot-input button {
+  background-color: #007bff;
+  color: white;
+  border: none;
+  border-radius: 5px;
+  padding: 10px 20px;
+  cursor: pointer;
+}
+
+.chatbot-input button:hover {
+  background-color: #0056b3;
+}
+.level-details-page {
+  padding: 20px;
+}
+
+.level-heading {
+  font-size: 2rem;
+  margin-bottom: 20px;
+}
+
+.level-stages {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+.stage {
+  border: 1px solid #ddd;
+  padding: 15px;
+  background-color: #f9f9f9;
+  border-radius: 8px;
+}
+
+.start-button {
+  margin-top: 10px;
+  padding: 10px 20px;
+  background-color: #4CAF50;
+  color: white;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+.start-button:hover {
+  background-color: #45a049;
+}
