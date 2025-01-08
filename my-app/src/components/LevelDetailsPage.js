@@ -64,6 +64,30 @@ const LevelDetailsPage = () => {
     }
   };
 
+  // Function to pronounce a specific stage's data
+  const pronounceStageData = (stageData) => {
+    if ("speechSynthesis" in window) {
+      const utterance = new SpeechSynthesisUtterance(stageData);
+      utterance.lang = "en-US"; // Adjust language code as per the content
+      utterance.rate = 1; // Speed of the speech
+      utterance.pitch = 1; // Pitch of the speech
+      utterance.volume = 1; // Volume (0.0 to 1.0)
+
+      // Handle errors in speech synthesis
+      utterance.onerror = (event) => {
+        console.error("Speech synthesis error:", event.error);
+      };
+
+      // Clear any pending or speaking utterances and then speak
+      if (window.speechSynthesis.speaking || window.speechSynthesis.pending) {
+        window.speechSynthesis.cancel();
+      }
+      window.speechSynthesis.speak(utterance);
+    } else {
+      alert("Speech Synthesis is not supported in your browser.");
+    }
+  };
+
   // Stage content based on the selected language and level
   const stages = {
     spanish: {
@@ -121,7 +145,7 @@ const LevelDetailsPage = () => {
             <h3>Stage {index + 1}</h3>
             <p>{stage}</p>
 
-            {/* Recording buttons for each stage */}
+            {/* Recording buttons and speaker for each stage */}
             <div className="recording-container">
               {!recordingState[index] ? (
                 <button
@@ -138,6 +162,15 @@ const LevelDetailsPage = () => {
                   Stop Recording
                 </button>
               )}
+              <span
+                className="speaker-icon"
+                role="button"
+                onClick={() => pronounceStageData(stage)}
+                title="Play Stage Audio"
+                style={{ cursor: "pointer", marginLeft: "10px", fontSize: "20px" }}
+              >
+                🔊
+              </span>
             </div>
 
             {/* Show transcript for the specific stage */}

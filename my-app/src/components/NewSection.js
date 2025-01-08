@@ -17,22 +17,72 @@ const countries = [
 const NewSection = () => {
   const [showRegistration, setShowRegistration] = useState(false);
   const [showLogin, setShowLogin] = useState(false);
+  const [formData, setFormData] = useState({
+    name: '',
+    email: '',
+    password: '',
+    confirmPassword: '',
+  });
+  const [message, setMessage] = useState('');
 
   const handleFlagClick = () => {
-    setShowRegistration(true); // Show the registration form when a flag is clicked
+    setShowRegistration(true);
   };
 
   const closeRegistration = () => {
-    setShowRegistration(false); // Close the registration form
+    setShowRegistration(false);
+    setMessage('');
   };
 
   const openLogin = () => {
-    setShowLogin(true); // Show the login form
-    setShowRegistration(false); // Close the registration form
+    setShowLogin(true);
+    setShowRegistration(false);
   };
 
   const closeLogin = () => {
-    setShowLogin(false); // Close the login form
+    setShowLogin(false);
+  };
+
+  const handleInputChange = (e) => {
+    const { name, value } = e.target;
+    setFormData((prevData) => ({ ...prevData, [name]: value }));
+  };
+
+  const handleRegister = async (e) => {
+    e.preventDefault();
+    if (formData.password !== formData.confirmPassword) {
+      setMessage('Passwords do not match.');
+      return;
+    }
+
+    try {
+      const response = await fetch('http://localhost:8080/api/saveUser', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({
+          name: formData.name,
+          email: formData.email,
+          password: formData.password,
+        }),
+      });
+
+      if (response.ok) {
+        setMessage('User registered successfully!');
+        setFormData({
+          name: '',
+          email: '',
+          password: '',
+          confirmPassword: '',
+        });
+      } else {
+        setMessage('Failed to register. Please try again.');
+      }
+    } catch (error) {
+      console.error('Error:', error);
+      setMessage('An error occurred. Please try again.');
+    }
   };
 
   return (
@@ -41,14 +91,14 @@ const NewSection = () => {
         <h2>Learn any language you want</h2>
         <p>
           We help people to learn the language of any country from any corner of the world.
-          Here are most commonly learned languages from countries like:
+          Here are the most commonly learned languages from countries like:
         </p>
         <div className="flag-icons-horizontal">
           {countries.map((country, index) => (
             <div
               key={index}
               className="flag-item-square"
-              onClick={handleFlagClick} // Handle flag click to open registration form
+              onClick={handleFlagClick}
             >
               <img
                 src={country.flag}
@@ -66,24 +116,53 @@ const NewSection = () => {
         <div className="modal-overlay" onClick={closeRegistration}>
           <div
             className="modal-container registration-modal"
-            onClick={(e) => e.stopPropagation()} // Prevent modal closure when clicking inside
+            onClick={(e) => e.stopPropagation()}
           >
             <h2>New User Registration</h2>
-            <form>
+            <form onSubmit={handleRegister}>
               <label htmlFor="name">Name:</label>
-              <input type="text" id="name" name="name" required />
+              <input
+                type="text"
+                id="name"
+                name="name"
+                value={formData.name}
+                onChange={handleInputChange}
+                required
+              />
 
               <label htmlFor="email">Email:</label>
-              <input type="email" id="email" name="email" required />
+              <input
+                type="email"
+                id="email"
+                name="email"
+                value={formData.email}
+                onChange={handleInputChange}
+                required
+              />
 
               <label htmlFor="password">Password:</label>
-              <input type="password" id="password" name="password" required />
+              <input
+                type="password"
+                id="password"
+                name="password"
+                value={formData.password}
+                onChange={handleInputChange}
+                required
+              />
 
-              <label htmlFor="confirm-password">Confirm Password:</label>
-              <input type="password" id="confirm-password" name="confirm-password" required />
+              <label htmlFor="confirmPassword">Confirm Password:</label>
+              <input
+                type="password"
+                id="confirmPassword"
+                name="confirmPassword"
+                value={formData.confirmPassword}
+                onChange={handleInputChange}
+                required
+              />
 
               <button type="submit">Register</button>
             </form>
+            {message && <p className="message">{message}</p>}
             <button className="close-button" onClick={openLogin}>
               Login
             </button>
@@ -96,16 +175,17 @@ const NewSection = () => {
         <div className="modal-overlay" onClick={closeLogin}>
           <div
             className="modal-container login-modal"
-            onClick={(e) => e.stopPropagation()} // Prevent modal closure when clicking inside
+            onClick={(e) => e.stopPropagation()}
           >
             <h2>Login</h2>
             <form>
               <label htmlFor="username">Username:</label>
-              <input type="text" id="username" name="username" required /><br></br>
-              <br></br>
+              <input type="text" id="username" name="username" required />
+              <br />
+              <br />
               <label htmlFor="password">Password:</label>
               <input type="password" id="password" name="password" required />
-              <br></br>
+              <br />
               <button type="submit">Sign In</button>
             </form>
             <button className="close-button" onClick={closeLogin}>

@@ -1415,3 +1415,12 @@ input[type="radio"] {
   text-align: center;
   color: #1f4e78; /* Dark blue or any color you prefer */
 }
+.speaker-icon {
+  color: #007bff;
+  transition: transform 0.2s;
+}
+
+.speaker-icon:hover {
+  transform: scale(1.2);
+  color: #0056b3;
+}
