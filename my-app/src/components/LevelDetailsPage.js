@@ -1,14 +1,70 @@
-import React from "react";
+import React, { useState } from "react";
 import { useParams } from "react-router-dom";
-import "../App.css"; // Link your CSS file
+import "../App.css";
+
+// Check for browser compatibility for Speech Recognition
+const SpeechRecognition = window.SpeechRecognition || window.webkitSpeechRecognition;
 
 const LevelDetailsPage = () => {
-  const { level, language } = useParams(); // Get the level and language from the URL parameter
+  const { level, language } = useParams();
 
-  // If language is undefined, set it to 'spanish' by default
-  const currentLanguage = language ? language.toLowerCase() : 'spanish'; 
+  // Default to Spanish if language is undefined
+  const currentLanguage = language ? language.toLowerCase() : "spanish";
 
-  // Sample data for the stages (You can replace these with dynamic content)
+  // State to track recording for each stage
+  const [recordingState, setRecordingState] = useState({});
+
+  // State to store transcript for each stage
+  const [transcripts, setTranscripts] = useState({});
+
+  // Initialize SpeechRecognition API
+  const recognition = new SpeechRecognition();
+  recognition.lang = "en-US"; // You can change this depending on the language
+  recognition.interimResults = true;
+  recognition.maxAlternatives = 1;
+
+  // Handle the start of recording for a specific stage
+  const startRecording = (stageIndex) => {
+    setRecordingState((prevState) => ({
+      ...prevState,
+      [stageIndex]: true,
+    }));
+    recognition.start(); // Start recording for the selected stage
+  };
+
+  // Handle the stop of recording for a specific stage
+  const stopRecording = (stageIndex) => {
+    setRecordingState((prevState) => ({
+      ...prevState,
+      [stageIndex]: false,
+    }));
+    recognition.stop(); // Stop recording for the selected stage
+  };
+
+  // Update the transcript as speech is recognized for a specific stage
+  recognition.onresult = (event) => {
+    const currentTranscript = event.results[event.resultIndex][0].transcript;
+    const stageIndex = event.resultIndex; // Use resultIndex as stageIndex
+    setTranscripts((prevState) => ({
+      ...prevState,
+      [stageIndex]: currentTranscript,
+    }));
+  };
+
+  // Handle the end of the speech recognition for a specific stage
+  recognition.onend = () => {
+    const lastStageIndex = Object.keys(recordingState).find(
+      (key) => recordingState[key] === true
+    );
+    if (lastStageIndex) {
+      setRecordingState((prevState) => ({
+        ...prevState,
+        [lastStageIndex]: false,
+      }));
+    }
+  };
+
+  // Stage content based on the selected language and level
   const stages = {
     spanish: {
       easy: [
@@ -17,14 +73,14 @@ const LevelDetailsPage = () => {
         "Stage 3: Tengo 20 años. (Translation: 'I am 20 years old.')"
       ],
       medium: [
-        "Stage 1: Me gusta mucho la música. Escucho música todos los días. (Translation: 'I really like music. I listen to music every day.')",
-        "Stage 2: Mi ciudad es muy bonita. Tiene muchos parques, restaurantes y museos. (Translation: 'My city is very beautiful. It has many parks, restaurants, and museums.')",
-        "Stage 3: El fin de semana pasado fui a la playa con mis amigos. El clima estaba perfecto, no hacía ni demasiado calor ni demasiado frío. (Translation: 'Last weekend I went to the beach with my friends. The weather was perfect, not too hot or too cold.')"
+        "Stage 1: Me gusta mucho la música...",
+        "Stage 2: Mi ciudad es muy bonita...",
+        "Stage 3: El fin de semana pasado fui a la playa..."
       ],
       hard: [
-        "Stage 1: Las ciencias son fundamentales para comprender el mundo que nos rodea. (Translation: 'Science is fundamental for understanding the world around us.')",
-        "Stage 2: El cambio climático es uno de los mayores desafíos de nuestro tiempo. (Translation: 'Climate change is one of the greatest challenges of our time.')",
-        "Stage 3: La inteligencia artificial está revolucionando casi todos los sectores de la sociedad moderna. (Translation: 'Artificial intelligence is revolutionizing almost every sector of modern society.')"
+        "Stage 1: Las ciencias son fundamentales...",
+        "Stage 2: El cambio climático...",
+        "Stage 3: La inteligencia artificial..."
       ]
     },
     french: {
@@ -34,23 +90,22 @@ const LevelDetailsPage = () => {
         "Stage 3: J'ai 20 ans. (Translation: 'I am 20 years old.')"
       ],
       medium: [
-        "Stage 1: J'aime beaucoup la musique. J'écoute de la musique tous les jours. (Translation: 'I really like music. I listen to music every day.')",
-        "Stage 2: Ma ville est très belle. Il y a beaucoup de parcs, de restaurants et de musées. (Translation: 'My city is very beautiful. It has many parks, restaurants, and museums.')",
-        "Stage 3: Le week-end dernier, je suis allé à la plage avec mes amis. Le temps était parfait, il ne faisait ni trop chaud ni trop froid. (Translation: 'Last weekend I went to the beach with my friends. The weather was perfect, not too hot or too cold.')"
+        "Stage 1: J'aime beaucoup la musique...",
+        "Stage 2: Ma ville est très belle...",
+        "Stage 3: Le week-end dernier, je suis allé à la plage..."
       ],
       hard: [
-        "Stage 1: Les sciences sont essentielles pour comprendre le monde qui nous entoure. (Translation: 'Science is essential for understanding the world around us.')",
-        "Stage 2: Le changement climatique est l'un des plus grands défis de notre époque. (Translation: 'Climate change is one of the greatest challenges of our time.')",
-        "Stage 3: L'intelligence artificielle révolutionne presque tous les secteurs de la société moderne. (Translation: 'Artificial intelligence is revolutionizing almost every sector of modern society.')"
+        "Stage 1: Les sciences sont essentielles...",
+        "Stage 2: Le changement climatique...",
+        "Stage 3: L'intelligence artificielle..."
       ]
     }
   };
 
-  // Check if the level exists in the stages data for the selected language
   const languageStages = stages[currentLanguage];
   const levelStages = languageStages ? languageStages[level] : null;
 
-  // If no stages found for the selected level or language, show an error message
+  // If no valid level is found
   if (!levelStages) {
     return <div>Invalid level or language selected.</div>;
   }
@@ -65,7 +120,28 @@ const LevelDetailsPage = () => {
           <div key={index} className="stage">
             <h3>Stage {index + 1}</h3>
             <p>{stage}</p>
-            <button className="start-button">Start</button>
+
+            {/* Recording buttons for each stage */}
+            <div className="recording-container">
+              {!recordingState[index] ? (
+                <button
+                  className="start-recording"
+                  onClick={() => startRecording(index)}
+                >
+                  Start Recording
+                </button>
+              ) : (
+                <button
+                  className="stop-recording"
+                  onClick={() => stopRecording(index)}
+                >
+                  Stop Recording
+                </button>
+              )}
+            </div>
+
+            {/* Show transcript for the specific stage */}
+            {transcripts[index] && <p className="transcript">Transcript: {transcripts[index]}</p>}
           </div>
         ))}
       </div>

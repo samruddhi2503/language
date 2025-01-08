@@ -28,6 +28,11 @@ const Dashboard = () => {
     navigate("/chatbot"); // Navigate to the Chatbot page
   };
 
+  const navigateToQuiz = () => {
+    setIsOpen(false);
+    navigate("/start-quiz"); // Navigate to the Start Quiz page
+  };
+
   useEffect(() => {
     if (isOpen) {
       document.addEventListener("click", closeMenu);
@@ -63,7 +68,7 @@ const Dashboard = () => {
             <li>Contact Us</li>
             <li onClick={navigateToChatbot}>Chat Bot</li> {/* Navigate to Chatbot */}
             <li onClick={navigateToLearning}>Start Learning</li> {/* Navigate to Start Learning */}
-            <li>Start Quiz</li>
+            <li onClick={navigateToQuiz}>Start Quiz</li> {/* Navigate to Start Quiz */}
           </ul>
         </div>
       )}

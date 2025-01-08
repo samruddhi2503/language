@@ -8,16 +8,18 @@ import Footer from "./components/Footer";
 import Login from "./components/Login";
 import Dashboard from "./components/Dashboard";
 import StartLearning from "./components/StartLearning";
-import ChatbotPage from "./components/ChatbotPage"; // Import the ChatbotPage component
-import LevelsPage from "./components/LevelsPage"; // Import the LevelsPage component
-import LevelDetailsPage from "./components/LevelDetailsPage"; // Import LevelDetailsPage component
+import ChatbotPage from "./components/ChatbotPage";
+import LevelsPage from "./components/LevelsPage";
+import LevelDetailsPage from "./components/LevelDetailsPage";
+import StartQuiz from "./components/StartQuiz"; // Import the StartQuiz component
 
 const App = () => {
   return (
     <Router>
       <div className="app">
+        {/* Define routes for the application */}
         <Routes>
-          {/* Other routes */}
+          {/* Home route */}
           <Route
             path="/"
             element={
@@ -31,11 +33,24 @@ const App = () => {
               </>
             }
           />
+
+          {/* Login page */}
           <Route path="/login" element={<Login />} />
+
+          {/* Start Learning page */}
           <Route path="/start-learning" element={<StartLearning />} />
+
+          {/* Chatbot page */}
           <Route path="/chatbot" element={<ChatbotPage />} />
-          <Route path="/levels" element={<LevelsPage />} /> {/* LevelsPage route */}
-          <Route path="/level-details/:level" element={<LevelDetailsPage />} /> {/* LevelDetailsPage route */}
+
+          {/* Levels page */}
+          <Route path="/levels" element={<LevelsPage />} />
+
+          {/* Level Details page with dynamic parameter */}
+          <Route path="/level-details/:level" element={<LevelDetailsPage />} />
+
+          {/* Start Quiz page */}
+          <Route path="/start-quiz" element={<StartQuiz />} />
         </Routes>
       </div>
     </Router>

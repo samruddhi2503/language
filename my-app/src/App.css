@@ -1131,3 +1131,287 @@ input[type="radio"] {
 .start-button:hover {
   background-color: #45a049;
 }
+
+.transparent-text {
+  color: rgba(255, 255, 255, 0.7); /* White with 70% transparency */
+  text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.5); /* Optional shadow for better readability */
+}
+/* Quiz Container Styles */
+.quiz-container {
+  width: 600px; /* Larger square container */
+  height: 600px; /* Match width for a square shape */
+  background-color: rgba(20, 90, 141, 0.8); /* Transparent blue background */
+  border: 2px solid rgba(29, 113, 146, 0.8); /* Solid complementary blue border */
+  border-radius: 15px; /* Rounded corners */
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  margin: 100px auto; /* Center horizontally and add margin */
+  text-align: center;
+  box-shadow: 0 12px 24px rgba(0, 0, 0, 0.3); /* Enhanced shadow for depth */
+  transition: transform 0.3s ease, box-shadow 0.3s ease; /* Smooth hover animation */
+}
+
+/* Hover Effect for Container */
+.quiz-container:hover {
+  transform: scale(1.05); /* Slightly enlarge on hover */
+  box-shadow: 0 16px 32px rgba(0, 0, 0, 0.4); /* Deeper shadow on hover */
+}
+/* Quiz Title */
+.quiz-title {
+  font-size: 36px;
+  color: #ffffff;
+  margin-bottom: 15px;
+  font-family: 'Arial', sans-serif;
+}
+
+/* Encouraging Text */
+.quiz-encouragement {
+  font-size: 20px;
+  color: #e0f7fa;
+  margin-bottom: 30px;
+  text-align: center;
+  line-height: 1.5;
+}
+
+/* Button Styles */
+.quiz-button {
+  padding: 15px 40px; /* Larger button for emphasis */
+  font-size: 20px;
+  color: #fff;
+  background-color: rgba(0, 145, 255, 0.7); /* Solid blue background */
+  border: none;
+  border-radius: 8px; /* Rounded corners */
+  cursor: pointer;
+  transition: background-color 0.3s ease, transform 0.3s ease;
+}
+
+/* Button Hover Effect */
+.quiz-button:hover {
+  background-color: rgba(135, 206, 235, 0.9); /* Slightly brighter blue on hover */
+  transform: translateY(-3px); /* Lift effect */
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2); /* Shadow on hover */
+}
+/* Container for MCQ question */
+.mcq-container {
+  text-align: center;
+  padding: 20px;
+  background-color: rgba(135, 206, 235, 0.9); /* Slightly transparent matching blue */
+  border: 2px solid #5dade2; /* Complementary blue border */
+  border-radius: 15px;
+  width: 450px;
+  margin: 20px auto;
+  box-shadow: 0 6px 12px rgba(0, 0, 0, 0.3);
+}
+
+/* Question text styling */
+.mcq-question {
+  font-size: 24px;
+  color: #1f4e78; /* Dark blue for contrast */
+  margin-bottom: 20px;
+  font-family: 'Arial', sans-serif;
+  font-weight: bold;
+}
+
+/* Grid layout for MCQ options */
+.mcq-options {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr); /* 2x2 grid */
+  gap: 15px; /* Space between options */
+}
+
+/* Individual option button */
+.mcq-option {
+  padding: 15px;
+  font-size: 18px;
+  color: #fff;
+  background-color: #1f4e78; /* Dark blue for contrast */
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: transform 0.2s, background-color 0.2s;
+}
+
+.mcq-option:hover {
+  background-color: #145a8d; /* Slightly darker blue on hover */
+  transform: scale(1.05); /* Slightly enlarge on hover */
+}
+/* Quiz Container Styles */
+.quiz-container {
+  width: 600px; /* Larger square container */
+  height: 600px; /* Match width for a square shape */
+  background-color: rgba(20, 90, 141, 0.8); /* Transparent blue background */
+  border: 2px solid rgba(29, 113, 146, 0.8); /* Solid complementary blue border */
+  border-radius: 15px; /* Rounded corners */
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  margin: 100px auto; /* Center horizontally and add margin */
+  text-align: center;
+  box-shadow: 0 12px 24px rgba(0, 0, 0, 0.3); /* Enhanced shadow for depth */
+  transition: transform 0.3s ease, box-shadow 0.3s ease; /* Smooth hover animation */
+}
+
+/* Hover Effect for Container */
+.quiz-container:hover {
+  transform: scale(1.05); /* Slightly enlarge on hover */
+  box-shadow: 0 16px 32px rgba(0, 0, 0, 0.4); /* Deeper shadow on hover */
+}
+
+/* Title Styles */
+.quiz-title {
+  font-size: 36px; /* Larger, bold title */
+  color: #ffffff; /* Bright white text */
+  margin-bottom: 20px;
+  font-family: 'Arial', sans-serif;
+}
+
+/* Encouraging Text */
+.quiz-encouragement {
+  font-size: 20px;
+  color: #e0f7fa; /* Soft white-blue */
+  margin-bottom: 25px;
+  text-align: center;
+  font-family: 'Arial', sans-serif;
+  line-height: 1.5;
+  max-width: 80%;
+}
+
+/* Button Styles */
+.quiz-button {
+  padding: 15px 40px; /* Larger button for emphasis */
+  font-size: 20px;
+  color: #fff;
+  background-color: rgba(0, 145, 255, 0.7); /* Solid blue background */
+  border: none;
+  border-radius: 8px; /* Rounded corners */
+  cursor: pointer;
+  transition: background-color 0.3s ease, transform 0.3s ease;
+}
+
+/* Button Hover Effect */
+.quiz-button:hover {
+  background-color: rgba(135, 206, 235, 0.9); /* Slightly brighter blue on hover */
+  transform: translateY(-3px); /* Lift effect */
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2); /* Shadow on hover */
+}
+
+/* MCQ Container */
+.mcq-container {
+  text-align: center;
+  padding: 25px;
+  background-color: rgba(135, 206, 235, 0.9); /* Transparent blue matching background */
+  border: 2px solid #5dade2; /* Complementary blue border */
+  border-radius: 15px;
+  width: 500px;
+  margin: 20px auto;
+  box-shadow: 0 6px 12px rgba(0, 0, 0, 0.3);
+}
+
+/* Question Text Styling */
+.mcq-question {
+  font-size: 24px;
+  color: #1f4e78; /* Dark blue */
+  margin-bottom: 20px;
+  font-family: 'Arial', sans-serif;
+  font-weight: bold;
+}
+
+/* Grid Layout for MCQ Options */
+.mcq-options {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr); /* 2x2 grid */
+  gap: 15px; /* Space between options */
+}
+
+/* Individual Option Button */
+.mcq-option {
+  padding: 15px;
+  font-size: 18px;
+  color: #fff;
+  background-color: #1f4e78; /* Dark blue */
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: transform 0.2s, background-color 0.2s;
+}
+
+.mcq-option:hover {
+  background-color: #145a8d; /* Slightly darker blue on hover */
+  transform: scale(1.05); /* Enlarge on hover */
+}
+
+/* Next Button */
+.next-button {
+  margin-top: 15px;
+  padding: 10px 20px;
+  font-size: 18px;
+  color: #fff;
+  background-color: #5dade2; /* Complementary blue */
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: background-color 0.3s ease, transform 0.3s ease;
+}
+
+.next-button:hover {
+  background-color: #418ac7; /* Darker blue */
+  transform: scale(1.05);
+}
+
+/* Styling for the stage buttons */
+.stage-buttons {
+  display: flex;
+  justify-content: space-around;
+  margin-top: 20px;
+}
+
+.quiz-button {
+  padding: 12px 25px;
+  font-size: 18px;
+  color: white;
+  background-color: #1f4e78;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  margin: 10px;
+}
+
+.quiz-button:hover {
+  background-color: #145a8d;
+  transform: scale(1.05);
+}
+
+/* Styling for the stage info text */
+.stage-info {
+  font-size: 18px;
+  color: #333;
+  font-weight: bold;
+  margin-top: 10px;
+}
+
+/* Styling for the 'Next' button */
+.next-button {
+  padding: 10px 20px;
+  font-size: 18px;
+  color: white;
+  background-color: #1f4e78;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  margin-top: 20px;
+}
+
+.next-button:hover {
+  background-color: #145a8d;
+  transform: scale(1.05);
+}
+/* Style for the recorder emoji */
+.recorder-option {
+  margin-top: 20px;
+  font-size: 24px;
+  text-align: center;
+  color: #1f4e78; /* Dark blue or any color you prefer */
+}
