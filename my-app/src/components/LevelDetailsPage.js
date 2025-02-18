@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { useParams } from "react-router-dom";
+import { useParams, useNavigate } from "react-router-dom"; // Import useNavigate
 import "../App.css";
 
 // Check for browser compatibility for Speech Recognition
@@ -7,51 +7,41 @@ const SpeechRecognition = window.SpeechRecognition || window.webkitSpeechRecogni
 
 const LevelDetailsPage = () => {
   const { level, language } = useParams();
-
-  // Default to Spanish if language is undefined
+  const navigate = useNavigate(); // Hook to programmatically navigate
   const currentLanguage = language ? language.toLowerCase() : "spanish";
 
-  // State to track recording for each stage
   const [recordingState, setRecordingState] = useState({});
-
-  // State to store transcript for each stage
   const [transcripts, setTranscripts] = useState({});
-
-  // Initialize SpeechRecognition API
   const recognition = new SpeechRecognition();
-  recognition.lang = "en-US"; // You can change this depending on the language
+  recognition.lang = "en-US"; 
   recognition.interimResults = true;
   recognition.maxAlternatives = 1;
 
-  // Handle the start of recording for a specific stage
   const startRecording = (stageIndex) => {
     setRecordingState((prevState) => ({
       ...prevState,
       [stageIndex]: true,
     }));
-    recognition.start(); // Start recording for the selected stage
+    recognition.start();
   };
 
-  // Handle the stop of recording for a specific stage
   const stopRecording = (stageIndex) => {
     setRecordingState((prevState) => ({
       ...prevState,
       [stageIndex]: false,
     }));
-    recognition.stop(); // Stop recording for the selected stage
+    recognition.stop();
   };
 
-  // Update the transcript as speech is recognized for a specific stage
   recognition.onresult = (event) => {
     const currentTranscript = event.results[event.resultIndex][0].transcript;
-    const stageIndex = event.resultIndex; // Use resultIndex as stageIndex
+    const stageIndex = event.resultIndex;
     setTranscripts((prevState) => ({
       ...prevState,
       [stageIndex]: currentTranscript,
     }));
   };
 
-  // Handle the end of the speech recognition for a specific stage
   recognition.onend = () => {
     const lastStageIndex = Object.keys(recordingState).find(
       (key) => recordingState[key] === true
@@ -64,21 +54,18 @@ const LevelDetailsPage = () => {
     }
   };
 
-  // Function to pronounce a specific stage's data
   const pronounceStageData = (stageData) => {
     if ("speechSynthesis" in window) {
       const utterance = new SpeechSynthesisUtterance(stageData);
-      utterance.lang = "en-US"; // Adjust language code as per the content
-      utterance.rate = 1; // Speed of the speech
-      utterance.pitch = 1; // Pitch of the speech
-      utterance.volume = 1; // Volume (0.0 to 1.0)
+      utterance.lang = "en-US";
+      utterance.rate = 1;
+      utterance.pitch = 1;
+      utterance.volume = 1;
 
-      // Handle errors in speech synthesis
       utterance.onerror = (event) => {
         console.error("Speech synthesis error:", event.error);
       };
 
-      // Clear any pending or speaking utterances and then speak
       if (window.speechSynthesis.speaking || window.speechSynthesis.pending) {
         window.speechSynthesis.cancel();
       }
@@ -88,7 +75,6 @@ const LevelDetailsPage = () => {
     }
   };
 
-  // Stage content based on the selected language and level
   const stages = {
     spanish: {
       easy: [
@@ -129,10 +115,14 @@ const LevelDetailsPage = () => {
   const languageStages = stages[currentLanguage];
   const levelStages = languageStages ? languageStages[level] : null;
 
-  // If no valid level is found
   if (!levelStages) {
     return <div>Invalid level or language selected.</div>;
   }
+
+  // Function to navigate to Start Quiz page
+  const navigateToStartQuiz = () => {
+    navigate("/start-quiz"); // Change this path to match your Start Quiz page route
+  };
 
   return (
     <div className="level-details-page">
@@ -177,6 +167,13 @@ const LevelDetailsPage = () => {
             {transcripts[index] && <p className="transcript">Transcript: {transcripts[index]}</p>}
           </div>
         ))}
+
+        {/* Start Quiz Button, displayed at the bottom after the last stage */}
+        <div className="start-quiz-container">
+          <button className="start-quiz-button" onClick={navigateToStartQuiz}>
+            Start Quiz
+          </button>
+        </div>
       </div>
     </div>
   );

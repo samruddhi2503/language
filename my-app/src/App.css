@@ -1424,3 +1424,98 @@ input[type="radio"] {
   transform: scale(1.2);
   color: #0056b3;
 }
+
+/* Timer styles */
+.timer-container {
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  font-size: 24px;
+  font-weight: bold;
+}
+
+.timer-circle {
+  width: 50px;
+  height: 50px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-color: green;
+  color: white;
+  font-size: 18px;
+  transition: all 1s ease;
+}
+
+.time-out {
+  background-color: red; /* Timer turns red when time is up */
+}
+
+/* Timeout message effects */
+.time-out-message {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  font-size: 24px;
+  color: red;
+  font-weight: bold;
+  animation: bounce 1s ease, fadeIn 1.5s forwards;
+}
+
+@keyframes bounce {
+  0% {
+    transform: translate(-50%, -50%) scale(1);
+  }
+  50% {
+    transform: translate(-50%, -50%) scale(1.2);
+  }
+  100% {
+    transform: translate(-50%, -50%) scale(1);
+  }
+}
+
+@keyframes fadeIn {
+  0% {
+    opacity: 0;
+  }
+  100% {
+    opacity: 1;
+  }
+}
+
+/* Next button styling */
+.next-button {
+  margin-top: 20px;
+  padding: 10px 20px;
+  background-color: #4CAF50;
+  color: white;
+  border: none;
+  cursor: pointer;
+}
+
+.next-button:hover {
+  background-color: #45a049;
+}
+.mcq-option.correct {
+  background-color: green;
+  color: white;
+}
+
+.mcq-option.incorrect {
+  background-color: red;
+  color: white;
+}
+.mcq-option.correct {
+  background-color: green;
+  color: white;
+}
+
+.mcq-option.incorrect {
+  background-color: red;
+  color: white;
+}
+
+.mcq-option:disabled {
+  opacity: 0.6;
+}

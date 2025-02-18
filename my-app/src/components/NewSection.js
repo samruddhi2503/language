@@ -2,16 +2,16 @@ import React, { useState } from 'react';
 import '../App.css';
 
 const countries = [
-  { name: 'USA', flag: 'https://flagcdn.com/w320/us.png' },
-  { name: 'Canada', flag: 'https://flagcdn.com/w320/ca.png' },
-  { name: 'UK', flag: 'https://flagcdn.com/w320/gb.png' },
-  { name: 'France', flag: 'https://flagcdn.com/w320/fr.png' },
-  { name: 'Germany', flag: 'https://flagcdn.com/w320/de.png' },
-  { name: 'India', flag: 'https://flagcdn.com/w320/in.png' },
-  { name: 'China', flag: 'https://flagcdn.com/w320/cn.png' },
-  { name: 'Japan', flag: 'https://flagcdn.com/w320/jp.png' },
-  { name: 'Australia', flag: 'https://flagcdn.com/w320/au.png' },
-  { name: 'Brazil', flag: 'https://flagcdn.com/w320/br.png' },
+  { name: 'English', flag: 'https://flagcdn.com/w320/gb.png' }, // English flag (United Kingdom)
+  { name: 'Spanish', flag: 'https://flagcdn.com/w320/es.png' }, // Spanish flag (Spain)
+  { name: 'Arabic', flag: 'https://flagcdn.com/w320/ae.png' }, // Arabic flag (UAE)
+  { name: 'French', flag: 'https://flagcdn.com/w320/fr.png' }, // French flag (France)
+  { name: 'German', flag: 'https://flagcdn.com/w320/de.png' }, // German flag (Germany)
+  { name: 'Hindi', flag: 'https://flagcdn.com/w320/in.png' }, // Hindi flag (India)
+  { name: 'Chinese', flag: 'https://flagcdn.com/w320/cn.png' }, // Chinese flag (China)
+  { name: 'Japanese', flag: 'https://flagcdn.com/w320/jp.png' }, // Japanese flag (Japan)
+  { name: 'Dutch', flag: 'https://flagcdn.com/w320/nl.png' }, // Dutch flag (Netherlands)
+  { name: 'Korean', flag: 'https://flagcdn.com/w320/kr.png' }, // Korean flag (South Korea)
 ];
 
 const NewSection = () => {
@@ -80,6 +80,7 @@ const NewSection = () => {
         setMessage('Failed to register. Please try again.');
       }
     } catch (error) {
+      
       console.error('Error:', error);
       setMessage('An error occurred. Please try again.');
     }
